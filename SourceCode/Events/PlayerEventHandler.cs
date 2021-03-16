@@ -60,9 +60,14 @@ public class PlayerEventHandler
         newAction.Add("DateTime", date_time);
         instance.dataLog.actions.Add(new Tuple<string, ActionData>("LogGeneralData", newAction));
 	}
-
-	//Scenes
-	static public void RoomMovement(string origin, string destination){
+    //Final Log
+    static public void UserClosedGame()
+    {
+        ActionData newAction = new ActionData();
+        instance.dataLog.actions.Add(new Tuple<string, ActionData>("User closed the Game", newAction));
+    }
+    //Scenes
+    static public void RoomMovement(string origin, string destination){
         ActionData newAction = new ActionData();
         newAction.Add("Origin", origin);
         newAction.Add("Destination", destination);
@@ -85,6 +90,16 @@ public class PlayerEventHandler
     {
         ActionData newAction = new ActionData();
         instance.dataLog.actions.Add(new Tuple<string, ActionData>("OpenMenu", newAction));
+    }
+    static public void OpenOptions()
+    {
+        ActionData newAction = new ActionData();
+        instance.dataLog.actions.Add(new Tuple<string, ActionData>("OpenOptions", newAction));
+    }
+    static public void CloseOptions()
+    {
+        ActionData newAction = new ActionData();
+        instance.dataLog.actions.Add(new Tuple<string, ActionData>("CloseOptions", newAction));
     }
     static public void CloseMenu()
     {
@@ -162,6 +177,16 @@ public class PlayerEventHandler
         newAction.Add("From", oldState);
         newAction.Add("To", node.nodeName);
         instance.dataLog.actions.Add(new Tuple<string, ActionData>("ChangeGenType", newAction));
+    }
+    static public void ChangeGenLinkType(LinkData link, string oldType)
+    {
+        ActionData newAction = new ActionData();
+        newAction.Add("DiagramCode", DiagramKeeper.GetCurrDiagramCode());
+        newAction.Add("Node1-Id", link.linkedNodeId[0].ToString());
+        newAction.Add("Node2-Id", link.linkedNodeId[1].ToString());
+        newAction.Add("From", oldType);
+        newAction.Add("To", link.type.ToString());
+        instance.dataLog.actions.Add(new Tuple<string, ActionData>("ChangeGenLinkType", newAction));
     }
     static public void ChangeKeyAttribute(NodeData node, string oldState)
     {

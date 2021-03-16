@@ -14,9 +14,7 @@ static public class DiagramKeeper
 	public static void SetDiagramCode(string diagramCode){
 		if (!diagrams.ContainsKey(diagramCode)){
 			string dictionaryPath = Path.Combine(Path.Combine(Application.persistentDataPath, "Saves"), "Diagram-" + diagramCode + ".json");
-			Debug.Log(dictionaryPath);
 			FileInfo file = new FileInfo(dictionaryPath);
-			Debug.Log(file.Exists);
 			if (file.Exists){
 				ERData erData = new ERData();
 				Debug.Log(file.Name);

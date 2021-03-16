@@ -12,12 +12,10 @@ public static class SceneHandler
 	//is re-instanced on each room change so we need to update from the player-controller script
 	private static PlayerController playerCont;
 	private static OutlineLookAt playerLook;
-	private static CinemachineBrain cameraBrain;
 	public static void SetPlayerComp(GameObject player, Transform camera)
 	{
 		playerCont = player.GetComponent<PlayerController>();
 		playerLook = player.GetComponent<OutlineLookAt>();
-		cameraBrain = camera.gameObject.GetComponent<CinemachineBrain>();
 	}
 	public static void NextRoom(string sceneName)
 	{
@@ -68,15 +66,13 @@ public static class SceneHandler
 		//playerCont.enabled = !pauseValue;
 		if (wantToPause)
 		{
-			if (cameraBrain != null)
-				cameraBrain.enabled = false;
+			CameraController.DisableRotation(true);
 			if (playerLook != null)
 				playerLook.enabled = false;
 			Cursor.lockState = CursorLockMode.None;
 		}
 		else {
-			if (cameraBrain != null)
-				cameraBrain.enabled = true;
+			CameraController.DisableRotation(false);
 			if (playerLook != null)
 				playerLook.enabled = true;
 			if (!inUIscene)

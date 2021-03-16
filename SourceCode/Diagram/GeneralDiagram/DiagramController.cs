@@ -3,14 +3,17 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(ERDiagram))]
 
 public class DiagramController : MonoBehaviour, IPointerClickHandler, IPointerExitHandler{
 	[SerializeField]
-	private GameObject createNodeMenu, editNodeMenu, editAttMenu, editGenMenu, nameMenu, background;
+	private GameObject createNodeMenu, editNodeMenu, editAttMenu, editGenMenu, nameMenu, nameMenuAtr, background;
 	[SerializeField]
 	private ScrollRect scroll;
+	[SerializeField]
+	private TextMeshProUGUI pathDisplay;
 
 	private Camera mainCamera;
 	public enum Modes { selecting, linking, unLinking };
@@ -20,7 +23,7 @@ public class DiagramController : MonoBehaviour, IPointerClickHandler, IPointerEx
 
 	private ERData erData_;
 	private ERDiagram erDiagram_;
-	private Dropdown namesDrop_;
+	private Dropdown nameList, nameListAttr;
 
 	private GameObject selectedNode;
 	private Vector2 selectedPos;
@@ -32,11 +35,15 @@ public class DiagramController : MonoBehaviour, IPointerClickHandler, IPointerEx
 		//Get Graphic and Data components of the ERDiagram
 		erData_ = DiagramKeeper.GetCurrDiagram();
 		erDiagram_ = GetComponent<ERDiagram>();
+		//Setup path display
+		pathDisplay.text = GetPathToDiagram();
 		//Load all names on the nameDropdown Menu
 		List<string> dropdownOptions = GlobalController.config.nodeNames;
 		//Apply the names to the DropDown Component
-		namesDrop_ = nameMenu.GetComponent<Dropdown>();
-		namesDrop_.AddOptions(dropdownOptions);
+		nameList = nameMenu.GetComponent<Dropdown>();
+		nameListAttr = nameMenuAtr.GetComponent<Dropdown>();
+		nameList.AddOptions(dropdownOptions);
+		nameListAttr.AddOptions(dropdownOptions);
 		//Create diagram form diagramData
 		erDiagram_.DrawDiagram(erData_);
 	}
@@ -147,6 +154,14 @@ public class DiagramController : MonoBehaviour, IPointerClickHandler, IPointerEx
 		editGenMenu.SetActive(false);
 		nameMenu.SetActive(false);
 	}
+	public string GetPathToDiagram()
+	{
+		return "Se guarda en: " + Path.Combine(Application.persistentDataPath,"Saves") + " Codigo: " + DiagramKeeper.GetCurrDiagramCode();
+	}
+	public void CopyPathToClipboard()
+	{
+		GUIUtility.systemCopyBuffer = Application.persistentDataPath;
+	}
 	public void GenerateJson()
 	{
 		erData_.Save();
@@ -163,7 +178,16 @@ public class DiagramController : MonoBehaviour, IPointerClickHandler, IPointerEx
 	public void ChangeName()
 	{
 		string oldName;
-		string newName = namesDrop_.options[namesDrop_.value].text;
+		string newName = nameList.options[nameList.value].text;
+		selectedNode.name = newName;
+		erDiagram_.objToNode[selectedNode].Rename(newName);
+		NodeData node = erDiagram_.UpdateName(selectedNode, out oldName);
+		PlayerEventHandler.ChangeName(node, oldName);
+	}
+	public void ChangeNameAtr()
+	{
+		string oldName;
+		string newName = nameListAttr.options[nameListAttr.value].text;
 		selectedNode.name = newName;
 		erDiagram_.objToNode[selectedNode].Rename(newName);
 		NodeData node = erDiagram_.UpdateName(selectedNode, out oldName);
@@ -265,6 +289,14 @@ public class DiagramController : MonoBehaviour, IPointerClickHandler, IPointerEx
 					PlayerEventHandler.AddLink(newLink);
 				}
 			}
+		}
+		else if (node1.type == NodeData.NodeType.Attribute && node2.type == NodeData.NodeType.Attribute)
+		{
+			//Only allow links between the same node types if they are attributes
+			newLink = new LinkData(node1, node2, LinkData.LinkTypes.AttrAttr);
+			erData_.CreateLink(newLink);
+			erDiagram_.DrawLink(newLink);
+			PlayerEventHandler.AddLink(newLink);
 		}
 	}
 	private void RemLink(GameObject node1, GameObject node2){

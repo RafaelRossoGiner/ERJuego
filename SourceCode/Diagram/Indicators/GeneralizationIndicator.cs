@@ -53,10 +53,12 @@ public class GeneralizationIndicator : IndicatorController, IPointerClickHandler
 			if (index == states.Count - 1) index = 0; else index++;
 			textComp.text = states[index];
 			linkAttached.nodeState = states[index];
-			if (linkAttached.type == LinkData.LinkTypes.Specialization)
+			LinkData.LinkTypes oldType = linkAttached.type;
+			if (oldType == LinkData.LinkTypes.Specialization)
 				linkAttached.type = LinkData.LinkTypes.Generalization;
 			else
 				linkAttached.type = LinkData.LinkTypes.Specialization;
+			PlayerEventHandler.ChangeGenLinkType(linkAttached, oldType.ToString());
 		}
 		else if (eventData.button == PointerEventData.InputButton.Right)
 		{

@@ -6,7 +6,7 @@ using UnityEngine.UI.Extensions;
 //Since we want to serialize this class on a json, we wont use inheritance or polymorphism
 [System.Serializable]
 public class LinkData {
-	public enum LinkTypes { EntityRel, EntityRelReflexive, EntityAttr, RelationAtt, Generalization, Specialization};
+	public enum LinkTypes { EntityRel, EntityRelReflexive, EntityAttr, RelationAtt, Generalization, Specialization, AttrAttr};
 	public LinkTypes type;
 	public string name;
 	public string nodeState; //Used for Cardinality or Generalization Type

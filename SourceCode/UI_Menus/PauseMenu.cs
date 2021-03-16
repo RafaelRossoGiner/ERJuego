@@ -14,12 +14,13 @@ public class PauseMenu : SimpleMenu<PauseMenu>
 	}
 	public void OnOptions()
 	{
+		Hide();
+		OptionsMenu.Show();
 	}
 	public void OnSaveAndExit()
 	{
-		PlayerEventHandler.GenerateLog();
-		//Close the app
-		Application.Quit();
+		Hide();
+		ConfirmExitMenu.Show();
 	}
 	private void Update()
 	{

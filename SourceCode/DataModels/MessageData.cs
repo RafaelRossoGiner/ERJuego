@@ -12,13 +12,16 @@ public class MessageData
 
 	string richMessage;
 
+	MessageData()
+	{
+		highlights = new List<string>();
+	}
+
 	public string GetRichText() { return richMessage; }
 	public string GetSender() { return entityCode; }
 
 	public void HighlightText()
 	{
-		
-		Debug.Log("Highlight");
 		richMessage = message + " ";
 		foreach(string word in highlights)
 		{

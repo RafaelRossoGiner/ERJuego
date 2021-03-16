@@ -20,6 +20,18 @@ public class PlayerController : MonoBehaviour
 	// Signal the SceneHandler which is the current PlayerObject, used for Pause and Overlay
 	void Start()
 	{
+		//Moves the player to the corresponding spawnPoint
+		if (Interactable.playerNeedsReposition)
+		{
+			Debug.Log("Postion changed?");
+			transform.rotation = Interactable.nextRespawnRotation;
+
+			Vector3 newPosition = Interactable.nextRespawnPosition;
+			if (transform.position.y < 2)
+				newPosition.y = 2;
+			transform.position = newPosition;
+			Interactable.playerNeedsReposition = false;
+		}
 		SceneHandler.SetPlayerComp(gameObject, followingCamera); //Sends information about the game object to the scene handler
 	}
 

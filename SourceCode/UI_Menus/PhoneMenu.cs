@@ -11,9 +11,9 @@ public class PhoneMenu : SimpleMenu<PhoneMenu>
 	[SerializeField]
 	GameObject SenderPrefab, MessagePrefab;
 
-	private static Color light_blue = new Color(0.5792453f, 255f, 0.8980471f);
+	private static Color light_red = new Color(1f, 0.6393762f, 0.6358491f);
 	private static Color light_green = new Color(0.4302955f, 0.9622642f, 0.4523566f);
-	private static Color light_orange = new Color(1f, 0.6844898f, 0.3339622f);
+	private static Color light_yellow = new Color(0.983665f, 1f, 0.6352941f);
 	private static Color palidText = Color.black - new Color(0f, 0f, 0f, 0.4f);
 
 	public void Start()
@@ -93,7 +93,7 @@ public class PhoneMenu : SimpleMenu<PhoneMenu>
 			case MessageData.State.Incompleted:
 				messageObj.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
 				messageObj.GetComponentInChildren<TextMeshProUGUI>().text = message.GetRichText();
-				messageObj.GetComponent<Image>().color = light_blue;
+				messageObj.GetComponent<Image>().color = light_red;
 				break;
 			case MessageData.State.Completed:
 				messageObj.GetComponentInChildren<TextMeshProUGUI>().color = palidText;
@@ -103,7 +103,7 @@ public class PhoneMenu : SimpleMenu<PhoneMenu>
 			case MessageData.State.NotRelated:
 				messageObj.GetComponentInChildren<TextMeshProUGUI>().color = palidText;
 				messageObj.GetComponentInChildren<TextMeshProUGUI>().text = message.message;
-				messageObj.GetComponent<Image>().color = light_orange;
+				messageObj.GetComponent<Image>().color = light_yellow;
 				break;
 			default:
 				Debug.LogError("Unidentified message state when trying to draw a message on PhoneMenu.cs");

@@ -69,21 +69,24 @@ public class ERDiagram : MonoBehaviour
 		switch (nodeData.type) {
 			case NodeData.NodeType.Entity:
 				newNode = Instantiate(erEntityPrefab, nodesContent.transform, false);
+				newNode.GetComponent<NodeController>().Initialize(nodeData, GetComponent<DiagramController>(), this);
 				break;
 			case NodeData.NodeType.Relation:
 				newNode = Instantiate(erRelationPrefab, nodesContent.transform, false);
+				newNode.GetComponent<NodeController>().Initialize(nodeData, GetComponent<DiagramController>(), this);
 				break;
 			case NodeData.NodeType.Attribute:
 				newNode = Instantiate(erAttributePrefab, nodesContent.transform, false);
+				newNode.GetComponent<NodeController>().Initialize(nodeData, GetComponent<DiagramController>(), this);
 				break;
 			case NodeData.NodeType.Generalization:
 				newNode = Instantiate(erGeneralizationPrefab, nodesContent.transform, false);
+				newNode.GetComponent<GeneralizationController>().Initialize(nodeData, GetComponent<DiagramController>(), this);
 				break;
 			default:
 				Debug.LogError("Se ha intentado instanciar un nodo de tipo desconocido");
 				break;
 		}
-		newNode.GetComponent<NodeController>().Initialize(nodeData, GetComponent<DiagramController>(), this);
 		//Set as first sibling of the content panel, this ensures that is drawn on top of the other nodes
 		newNode.transform.SetAsFirstSibling();
 		newNode.GetComponent<RectTransform>().anchoredPosition = nodeData.position;
@@ -147,6 +150,7 @@ public class ERDiagram : MonoBehaviour
 		{
 			case LinkData.LinkTypes.EntityAttr:
 			case LinkData.LinkTypes.RelationAtt:
+			case LinkData.LinkTypes.AttrAttr:
 				mainLinkObj = Instantiate(partPrefab, nodesContent);
 				mainLinkObj.GetComponent<ParticipationIndicator>().Initialize(rctsLinking, linksContent, link);
 				break;

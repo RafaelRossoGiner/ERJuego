@@ -7,11 +7,13 @@ using Newtonsoft.Json;
 public class DiagramLog
 {
     public string DiagramName;
-    public List<string> Entities, Relations, Attributes, WeakEntities, WeakRelations, MultAttributes, EntRel, EntAtt, RelAtt;
+    public List<string> Entities, Relations, Attributes, WeakEntities, WeakRelations, MultAttributes, EntRel, EntAtt, RelAtt, AttrAttr;
     public Dictionary<string, List<string>> Generalizations;
 
     private Dictionary<int, string> IdToName;
     public DiagramLog(ERData data) {
+        //This constructor transforms the more compact ERData class representation into a more
+        //readable and useful serialization class for future data/process mining purposes
         DiagramName = data.diagramCode;
 
         Entities = new List<string>();
@@ -23,6 +25,7 @@ public class DiagramLog
         EntRel = new List<string>();
         EntAtt = new List<string>();
         RelAtt = new List<string>();
+        AttrAttr = new List<string>();
 
         Generalizations = new Dictionary<string, List<string>>();
         IdToName = new Dictionary<int, string>();
@@ -87,7 +90,10 @@ public class DiagramLog
                 case LinkData.LinkTypes.RelationAtt:
                     RelAtt.Add(link.name);
                     break;
-               case LinkData.LinkTypes.Generalization:
+                case LinkData.LinkTypes.AttrAttr:
+                    AttrAttr.Add(link.name);
+                    break;
+                case LinkData.LinkTypes.Generalization:
                     {
                         string Gen = IdToName[link.linkedNodeId[0]];
                         Debug.Log("Gen " + Gen);

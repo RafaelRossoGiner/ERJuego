@@ -10,20 +10,16 @@ public class GeneralizationController : NodeController
 	private List<string> states;
 	private int index;
 
-	public void Initialize(NodeData node, List<string> posibleStates, DiagramController controller, ERDiagram diagram)
+	public override void Initialize(NodeData node, DiagramController controller, ERDiagram diagram)
 	{
-		Debug.ClearDeveloperConsole();
-		Debug.Log("Called Initialization on GeneralizationController.cs");
 		base.Initialize(node, controller, diagram);
-
-		states = posibleStates;
 		index = states.IndexOf(nodeAttached.nodeName);
 		if (index == -1)
 		{
 			//Not nodeName found on the list
 			index = 0;
 		}
-		textComp.text = states[index];
+		nodeAttached.Rename(states[index]);
 	}
 	public override void OnPointerClick(PointerEventData eventData)
 	{

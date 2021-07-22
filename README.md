@@ -21,6 +21,12 @@ Este proyecto ha sido financiado en la convocatoria de Innovación Docente de la
 
 ![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%201.png)
 
+
+![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%202.png)
+
+![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%203.png)
+
+
 README.md
 
 ====================

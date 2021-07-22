@@ -19,10 +19,16 @@ Participantes en el proyecto:
 Este proyecto ha sido financiado en la convocatoria de Innovación Docente de la Universidad de Cádiz 2020/21 “Proyecto de Innovación Docente de la UCA"  (código sol-202000162258-tra)
 
 
+
+La siguiente captura muestra el entorno principal en el que nos encontraremos para ir a realizar las actividades:
+
 ![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%201.png)
 
+La siguiente imagen muestra el sistema de objetivos implementado en el juego, en el cual podemos indicar que tarea tenemos realizada ya:
 
 ![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%202.png)
+
+Por último, se muestra como es el sistema de modelado ER:
 
 ![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%203.png)
 

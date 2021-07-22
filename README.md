@@ -56,3 +56,15 @@ Analysis of data
 
 This project has been funded in the call for Teaching Innovation of the University of Cádiz 2020/21 "Proyecto de Innovación Docente de la UCA" (código sol-202000162258-
 tra)
+
+The following screenshot shows the main environment in which we will find ourselves to carry out the activities:
+
+![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%201.png)
+
+The following image shows the objective system implemented in the game, in which we can indicate what task we have already carried out:
+
+![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%202.png)
+
+Finally, the ER modeling system is shown:
+
+![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%203.png)

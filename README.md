@@ -19,6 +19,8 @@ Participantes en el proyecto:
 Este proyecto ha sido financiado en la convocatoria de Innovación Docente de la Universidad de Cádiz 2020/21 “Proyecto de Innovación Docente de la UCA"  (código sol-202000162258-tra)
 
 
+![Image text](https://github.com/RafaelRossoGiner/BBDD2/blob/main/Images/Captura%20de%20pantalla%201.png)
+
 README.md
 
 ====================

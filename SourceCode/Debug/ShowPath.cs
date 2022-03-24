@@ -9,6 +9,6 @@ public class ShowPath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Text>().text = "Se guarda en: " + Application.persistentDataPath + " Codigo: " + DiagramKeeper.GetCurrDiagramCode();
+        GetComponent<Text>().text = "Se guarda en: " + Application.persistentDataPath + " Codigo: " + GameDiagramManager.GetCurrDiagramCode();
     }
 }

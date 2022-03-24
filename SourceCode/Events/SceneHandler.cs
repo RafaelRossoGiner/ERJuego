@@ -19,7 +19,8 @@ public static class SceneHandler
 	}
 	public static void NextRoom(string sceneName)
 	{
-		PlayerEventHandler.RoomMovement(SceneManager.GetActiveScene().name, sceneName);
+		EventHandler.RoomMovement(SceneManager.GetActiveScene().name, sceneName);
+		GameDiagramManager.SetDiagramCode("");
 		SceneManager.LoadScene(sceneName);
 		SceneManager.LoadScene("PlayerUI", LoadSceneMode.Additive);
 		inUIscene = false;
@@ -27,9 +28,9 @@ public static class SceneHandler
 	}
 	public static void NextRoom(string sceneName, string diagramCode)
 	{
-		PlayerEventHandler.RoomMovement(SceneManager.GetActiveScene().name, sceneName);
-		DiagramKeeper.SetDiagramCode(diagramCode);
-		DiagramKeeper.GetCurrDiagram();
+		EventHandler.RoomMovement(SceneManager.GetActiveScene().name, sceneName);
+		GameDiagramManager.SetDiagramCode(diagramCode);
+		GameDiagramManager.GetCurrDiagram();
 		SceneManager.LoadScene(sceneName);
 		SceneManager.LoadScene("PlayerUI", LoadSceneMode.Additive);
 		inUIscene = false;
@@ -37,7 +38,7 @@ public static class SceneHandler
 	public static void StartDiagram()
 	{
 		previousRoomName = SceneManager.GetActiveScene().name;
-		PlayerEventHandler.RoomMovement(previousRoomName, "Diagram");
+		EventHandler.RoomMovement(previousRoomName, "Diagram");
 		SceneManager.LoadScene("Diagram");
 		SceneManager.LoadScene("PlayerUI", LoadSceneMode.Additive);
 		inUIscene = true;
@@ -45,7 +46,7 @@ public static class SceneHandler
 
 	public static void CloseDiagram()
 	{
-		PlayerEventHandler.RoomMovement("Diagram", previousRoomName);
+		EventHandler.RoomMovement("Diagram", previousRoomName);
 		SceneManager.LoadScene(previousRoomName);
 		SceneManager.LoadScene("PlayerUI", LoadSceneMode.Additive);
 		inUIscene = false;
@@ -54,12 +55,6 @@ public static class SceneHandler
 
 	public static bool isDiagram() { return inUIscene; }
 	public static bool isPaused() { return inPause; }
-	public static bool Pause()
-	{
-		Pause(!inPause);
-		return inPause;
-	}
-
 	public static void Pause(bool wantToPause)
 	{
 		//If it's paused, deactivate movement and camera move

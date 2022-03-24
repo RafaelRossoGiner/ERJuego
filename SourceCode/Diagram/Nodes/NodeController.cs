@@ -7,7 +7,7 @@ using TMPro;
 public class NodeController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
 	public NodeData nodeAttached;
-	public DiagramController diagramController;
+	public DiagramMenuController diagramController;
 
 	[SerializeField]
 	private Sprite nodeSprite, nodeSpriteDoub;
@@ -16,14 +16,24 @@ public class NodeController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	[SerializeField]
 	protected Image imageComp;
 
-	protected ERDiagram diagram;
+	protected DiagramEditor diagram;
 	private RectTransform rct;
 	private Vector2 prevPos;
 	private Vector2 startMouse;
+	private Vector2 resolutionSize;
+
+	// Vector instance to avoid continous object creating in the drag event.
+	private Vector2 position;
 
 	protected bool beingDragged;
 
-	public virtual void Initialize(NodeData node, DiagramController controller, ERDiagram currDiag)
+	void Start()
+	{
+		rct = GetComponent<RectTransform>();
+		// Enable raycast to pass through transparent pixels
+		imageComp.alphaHitTestMinimumThreshold = 1;
+	}
+	public virtual void Initialize(NodeData node, DiagramMenuController controller, DiagramEditor currDiag)
 	{
 		nodeAttached = node;
 		diagramController = controller;
@@ -50,10 +60,6 @@ public class NodeController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 			imageComp.sprite = nodeSprite;
 		}
 	}
-	void Start()
-	{
-		rct = GetComponent<RectTransform>();
-	}
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
@@ -66,12 +72,11 @@ public class NodeController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 	{
 		if (eventData.button != PointerEventData.InputButton.Left)
 			return;
-		rct.anchoredPosition = prevPos + eventData.position - startMouse;
-		Debug.Log("Increment");
+		rct.anchoredPosition = prevPos + (eventData.position - startMouse)/diagram.CurrentScale;
 	}
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		diagram.objToNode[gameObject].position = rct.anchoredPosition;
+		diagram.ObjToNode(gameObject).position = rct.anchoredPosition;
 		beingDragged = false;
 	}
 

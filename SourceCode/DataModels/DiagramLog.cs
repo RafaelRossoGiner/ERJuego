@@ -82,21 +82,20 @@ public class DiagramLog
             {
                 case LinkData.LinkTypes.EntityRel:
                 case LinkData.LinkTypes.EntityRelReflexive:
-                    EntRel.Add(link.name + " Participacion: " + participation + " Cardinalidad: " + link.nodeState);
+                    EntRel.Add(link.nameIDs + " Participacion: " + participation + " Cardinalidad: " + link.nodeState);
                     break;
                 case LinkData.LinkTypes.EntityAttr:
-                    EntAtt.Add(link.name);
+                    EntAtt.Add(link.nameIDs);
                     break;
                 case LinkData.LinkTypes.RelationAtt:
-                    RelAtt.Add(link.name);
+                    RelAtt.Add(link.nameIDs);
                     break;
                 case LinkData.LinkTypes.AttrAttr:
-                    AttrAttr.Add(link.name);
+                    AttrAttr.Add(link.nameIDs);
                     break;
                 case LinkData.LinkTypes.Generalization:
                     {
                         string Gen = IdToName[link.linkedNodeId[0]];
-                        Debug.Log("Gen " + Gen);
                         List<string> SpecNodes = Generalizations[Gen];
                         Generalizations.Remove(Gen);
                         Gen += " - " + IdToName[link.linkedNodeId[1]];
@@ -107,7 +106,6 @@ public class DiagramLog
                 case LinkData.LinkTypes.Specialization:
                     {
                         string Gen = IdToName[link.linkedNodeId[0]];
-                        Debug.Log("Spec "+Gen);
                         Generalizations[Gen].Add(IdToName[link.linkedNodeId[1]]);
                     }
                     break;

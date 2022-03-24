@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class NodeHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-	public DiagramController controller;
+	public DiagramMenuController controller;
 	private Image mySprite;
 	private static List<NodeHighlighter> highlights = new List<NodeHighlighter>();
 
@@ -23,18 +23,22 @@ public class NodeHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 			hl.mySprite.color = Color.white;
 		}
 	}
-	public static void SetFirst(GameObject firstNode, DiagramController.Modes mode)
+	public static void SetFirst(GameObject firstNode, DiagramMenuController.Modes mode)
 	{
 		first = firstNode.GetComponent<NodeHighlighter>();
+		foreach (NodeHighlighter hl in highlights)
+		{
+			hl.mySprite.color = Color.white;
+		}
 		switch (mode)
 		{
-			case DiagramController.Modes.selecting:
+			case DiagramMenuController.Modes.selecting:
 				first.mySprite.color = Color.yellow;
 				break;
-			case DiagramController.Modes.linking:
+			case DiagramMenuController.Modes.linking:
 				first.mySprite.color = Color.green;
 				break;
-			case DiagramController.Modes.unLinking:
+			case DiagramMenuController.Modes.unLinking:
 				first.mySprite.color = Color.red;
 				break;
 		}
@@ -44,13 +48,13 @@ public class NodeHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	public void OnPointerEnter(PointerEventData eventData){
 		switch (controller.mode)
 		{
-			case DiagramController.Modes.selecting:
+			case DiagramMenuController.Modes.selecting:
 				mySprite.color = Color.yellow;
 				break;
-			case DiagramController.Modes.linking:
+			case DiagramMenuController.Modes.linking:
 				mySprite.color = Color.green;
 				break;
-			case DiagramController.Modes.unLinking:
+			case DiagramMenuController.Modes.unLinking:
 				mySprite.color = Color.red;
 				break;
 		}

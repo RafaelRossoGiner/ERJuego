@@ -43,6 +43,7 @@ public class GeneralizationIndicator : IndicatorController, IPointerClickHandler
 		
 		link.nodeState = states[index];
 		textComp.text = states[index];
+		UpdateLineSprite();
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -58,7 +59,7 @@ public class GeneralizationIndicator : IndicatorController, IPointerClickHandler
 				linkAttached.type = LinkData.LinkTypes.Generalization;
 			else
 				linkAttached.type = LinkData.LinkTypes.Specialization;
-			PlayerEventHandler.ChangeGenLinkType(linkAttached, oldType.ToString());
+			EventHandler.ChangeGenLinkType(linkAttached, oldType.ToString());
 		}
 		else if (eventData.button == PointerEventData.InputButton.Right)
 		{

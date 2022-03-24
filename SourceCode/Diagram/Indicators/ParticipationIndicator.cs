@@ -20,6 +20,7 @@ public class ParticipationIndicator : IndicatorController, IPointerClickHandler
 		lines.Add(line);
 
 		myCent.rcts = rectTransforms;
+		UpdateLineSprite();
 	}
 	public void OnPointerClick(PointerEventData eventData)
 	{

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI.Extensions;
 
 public class PauseMenu : SimpleMenu<PauseMenu>
@@ -10,7 +8,7 @@ public class PauseMenu : SimpleMenu<PauseMenu>
 		SceneHandler.Pause(false);
 		Hide();
 		OverlayMenu.Show();
-		PlayerEventHandler.CloseMenu();
+		EventHandler.CloseMenu();
 	}
 	public void OnOptions()
 	{
@@ -22,16 +20,11 @@ public class PauseMenu : SimpleMenu<PauseMenu>
 		Hide();
 		ConfirmExitMenu.Show();
 	}
-	private void Update()
-	{
-		if (!Input.anyKey)
-			return;
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			SceneHandler.Pause(false);
-			Hide();
-			OverlayMenu.Show();
-			PlayerEventHandler.CloseMenu();
-		}
+    public override void OnBackPressed()
+    {
+		SceneHandler.Pause(false);
+		Hide();
+		OverlayMenu.Show();
+		EventHandler.CloseMenu();
 	}
 }

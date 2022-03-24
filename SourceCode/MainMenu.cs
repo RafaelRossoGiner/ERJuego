@@ -14,13 +14,17 @@ public class MainMenu : MonoBehaviour
     {
         if (nameInput.text != "")
         {
-            PlayerEventHandler.SetPlayer(nameInput.text);
+            EventHandler.SetPlayer(nameInput.text);
             SceneHandler.NextRoom("Pasillo");
 		}
 		else
 		{
             errorDisplay.text = "Debes introducir tu identificador antes de comenzar el juego";
 		}
+    }
+    public void DeleteProgress()
+    {
+        // Placeholder
     }
 
     public void QuitGame()

@@ -78,6 +78,7 @@ public class OptionsMenu : SimpleMenu<OptionsMenu>
 	{
 		CameraController.SetSensibility(value);
 		sensibilityText.SetText((value / 10).ToString());
+		CameraController.DisableRotation(true);
 	}
 	public void OnInformation()
 	{
@@ -88,5 +89,12 @@ public class OptionsMenu : SimpleMenu<OptionsMenu>
 	{
 		Hide();
 		PauseMenu.Show();
+	}
+	public override void OnBackPressed()
+	{
+		SceneHandler.Pause(false);
+		Hide();
+		OverlayMenu.Show();
+		EventHandler.OpenMenu();
 	}
 }

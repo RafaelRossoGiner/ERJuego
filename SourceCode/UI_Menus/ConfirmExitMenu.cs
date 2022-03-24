@@ -11,9 +11,13 @@ public class ConfirmExitMenu : SimpleMenu<ConfirmExitMenu>
 	}
 	public void OnConfirm()
 	{
-		PlayerEventHandler.UserClosedGame();
-		PlayerEventHandler.GenerateLog();
+		EventHandler.UserClosedGame();
+		SerializationManager.SavePlayerData();
 		//Close the app
 		Application.Quit();
 	}
+    public override void OnBackPressed()
+    {
+		OnCancel();
+    }
 }

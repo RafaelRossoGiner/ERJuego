@@ -11,7 +11,9 @@ public class InformationMenu : SimpleMenu<InformationMenu>
 	}
 	public void OnGoBack()
 	{
+		SceneHandler.Pause(false);
 		Hide();
-		OptionsMenu.Show();
+		OverlayMenu.Show();
+		EventHandler.OpenMenu();
 	}
 }

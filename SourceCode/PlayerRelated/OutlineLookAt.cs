@@ -13,10 +13,14 @@ public class OutlineLookAt : MonoBehaviour
     [SerializeField]
     private LayerMask interactableLayers;
 
-    Outline currentOutliner;
-    Outline prevOutliner;
+    private static Outline currentOutliner;
+    private static Outline prevOutliner;
 
-    Interactable currentInteractable;
+    private static Interactable currentInteractable;
+
+    private static Color validInteraction = new Color(0f, 1f, 0.2f);
+    private static Color lockedInteraction = new Color(1f, 0f, 0f);
+
     void Update()
     {
         Vector3 target = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.5f));
@@ -35,25 +39,6 @@ public class OutlineLookAt : MonoBehaviour
             }
 
             prevOutliner = currentOutliner;
-            /* if (hit.collider.gameObject.CompareTag("Interact"))
-            {
-                currentOutliner = hit.collider.GetComponent<Outline>();
-                currentInteractable = hit.collider.GetComponent<Interactable>();
-                Debug.Log("Inter" + currentInteractable.name);
-
-                if (prevOutliner != currentOutliner)
-				{
-                    HideOutline();
-                    ShowOutline();
-				}
-
-                prevOutliner = currentOutliner;
-            }
-			else
-			{
-                HideOutline();
-                currentInteractable = null;
-            }*/
 		}
 		else
 		{
@@ -72,7 +57,16 @@ public class OutlineLookAt : MonoBehaviour
 	{
         if (currentOutliner != null)
         {
-            currentOutliner.enabled = true;
+            if (currentInteractable != null && GameDiagramManager.IsUnlocked(currentInteractable.GetRoomCode()))
+            {
+                currentOutliner.OutlineColor = validInteraction;
+                currentOutliner.enabled = true;
+            }
+            else
+            {
+                currentOutliner.OutlineColor = lockedInteraction;
+                currentOutliner.enabled = true;
+            }
         }
     }
     

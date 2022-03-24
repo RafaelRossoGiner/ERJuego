@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     static float camYspd;
     static CinemachineFreeLook brain;
 
-    void Start()
+    public void Start()
     {
         brain = GetComponent<CinemachineFreeLook>();
         SetSensibility(sensibility);

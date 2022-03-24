@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 		//Moves the player to the corresponding spawnPoint
 		if (Interactable.playerNeedsReposition)
 		{
-			Debug.Log("Postion changed?");
+			Debug.Log("Repositioned");
 			transform.rotation = Interactable.nextRespawnRotation;
 
 			Vector3 newPosition = Interactable.nextRespawnPosition;

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ReflexiveIndicator : IndicatorController, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-	private ERDiagram diagram;
+	private DiagramEditor diagram;
 	private Vector2 prevPos;
 	private Vector2 startMouse;
 
@@ -23,9 +23,10 @@ public class ReflexiveIndicator : IndicatorController, IPointerClickHandler, IBe
 			UpdateLineSprite();
 		}
 	}
-	public void Initialize(ERDiagram currDiag)
+	public void Initialize(DiagramEditor currDiag)
 	{
 		diagram = currDiag;
+		UpdateLineSprite();
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)

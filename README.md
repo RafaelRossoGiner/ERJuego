@@ -18,7 +18,7 @@ Participantes en el proyecto:
 
 Este proyecto ha sido financiado en la convocatoria de Innovación Docente de la Universidad de Cádiz 2020/21 “Proyecto de Innovación Docente de la UCA"  (código sol-202000162258-tra)
 
-
+Este proyecto ha sido ampliado en el curso 2021/22 bajo el título "Ampliación multinivel de juego serio para aprendizaje de modelado conceptual de datos con interfaz para minería de procesos"
 
 La siguiente captura muestra el entorno principal en el que nos encontraremos para ir a realizar las actividades:
 
@@ -56,6 +56,8 @@ Analysis of data
 
 This project has been funded in the call for Teaching Innovation of the University of Cádiz 2020/21 "Proyecto de Innovación Docente de la UCA" (código sol-202000162258-
 tra)
+
+This project has been extended in 2021/22 under the title "Ampliación multinivel de juego serio para aprendizaje de modelado conceptual de datos con interfaz para minería de procesos"
 
 The following screenshot shows the main environment in which we will find ourselves to carry out the activities:
 
